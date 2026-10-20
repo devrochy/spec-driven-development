@@ -1,0 +1,476 @@
+# Catálogo de skills, comandos y agentes disponibles para ejecutar el plan.
+# Inventario hecho el 2026-10-01 sobre esta máquina y la cuenta de claude.ai.
+# `herramientas/regenerar.py` valida que cada HU solo recomiende entradas de este catálogo
+# y genera con él la tabla de la guía de ejecución.
+#
+# tipo:   skill | comando | agente
+# origen: proyecto (solvershub-backend/.claude) | plugin <nombre> | usuario (~/.claude/skills)
+#         | claude.ai | integrada
+# estado: ok | desactualizada (se corrige en la Semana 0 de la guía)
+
+# ---------------------------------------------------------------- proyecto: skills
+adr:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: Registrar una decisión de arquitectura como ADR numerado en docs/adr
+agentcore-conventions:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Dónde va cada cosa (core, pack, configuración, artefacto del tenant), límites de capa y nombres reales del repo Python"
+db-migration:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Crear o revisar migraciones Alembic (core y packs) con tenant_id, RLS forzada, policy con nullif y tablas de sistema"
+desplegar-test-agent-core:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Mergear a develop, desplegar en el Coolify de test (app tr0vpdei…) y verificar salud; nunca toca producción"
+eval-author:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: Crear o ampliar golden sets por tenant o del framework
+incident:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: Runbook de triage cuando el agente no responde o responde mal
+meta-whatsapp:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Conocimiento vigente de WhatsApp/Meta: Embedded Signup, plantillas, ventana de 24 h, precios 2026, firma del webhook y BYOK"
+pagos-wompi:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Conocimiento vigente de Wompi: firma de integridad, checksum de eventos, sandbox/producción, mínimos y conciliación"
+new-pack:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: Crear un pack vertical nuevo con su estructura Python, Alembic y flow
+new-tool:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Crear una MCPTool en un pack: schema, handler con errores como resultado, flow.json, tests cross-tenant y eval"
+onboard-tenant:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Dar de alta un cliente con el CLI real (tenant create/seed), TENANTS_ROOT, BYOK, evals por tenant y publicación"
+release:
+  tipo: skill
+  origen: proyecto
+  estado: ok
+  uso: "Release develop → main: gates de CI, auditor, evals, migraciones, OpenAPI, CHANGELOG, deploy de producción, tag y rollback"
+
+# ---------------------------------------------------------------- proyecto: agentes
+arquitecto:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Revisar un plan o diseño contra los ADR y las invariantes antes de codificar
+auditor-multitenant:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Auditar el aislamiento entre negocios tras cambios de queries, migraciones, tools o rutas
+customizer:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Ajustar prompt, tono y comportamiento del asistente de un negocio
+eval-runner:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Correr el golden set contra un candidato y reportar regresiones
+migrator:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Migrar datos externos (CSV, BD, API) a las entidades de los packs
+optimizer:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Optimizar costo de LLM y precisión de las tools
+plugin-dev:
+  tipo: agente
+  origen: proyecto
+  estado: ok
+  uso: Generar un plugin o pack desde cero
+
+# ---------------------------------------------------------------- solvershub-docs
+ejecutar-hu:
+  tipo: skill
+  origen: solvershub-docs
+  estado: ok
+  uso: Ejecutar una HU de punta a punta (DoR, skills del frontmatter, DoD, estado y regenerar)
+# ---------------------------------------------------------------- solvershub-panel
+panel-ui:
+  tipo: skill
+  origen: solvershub-panel
+  estado: ok
+  uso: "UI del panel nuevo: DESIGN.md, tokens, BFF con X-Tenant-Id y formateo es-CO"
+# ---------------------------------------------------------------- plugin backend-design
+backend-design:think-before-coding:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Flujo senior de 6 pasos antes de escribir un componente backend
+backend-design:error-handling-as-design:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Diseñar el camino de error como parte del contrato
+backend-design:idempotency-and-side-effects:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Idempotencia y outbox en pagos, mensajes, eventos y terceros
+backend-design:data-modeling-discipline:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Invariantes en el esquema en vez de confiar en la aplicación
+backend-design:migration-safety:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Migraciones sin bloqueos, reversibles y por etapas
+backend-design:query-discipline:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Evitar N+1, índices faltantes, listas sin límite y mala paginación
+backend-design:security-discipline:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Reflejo de seguridad en cada cambio (IDOR, inyección, secretos, auth faltante)
+backend-design:auth-and-authorization:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Sesiones, tokens, permisos y alcance multi-tenant
+backend-design:observability-by-default:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Logs estructurados, métricas RED, trazas y healthchecks reales
+backend-design:performance-and-scaling:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Decidir rendimiento y escala con la carga real en mente
+backend-design:testing-with-discernment:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Decidir qué vale la pena probar y evitar tests que no prueban nada
+backend-design:debugging-discipline:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Método de investigación ante algo roto, lento o incorrecto
+backend-design:boring-by-default:
+  tipo: skill
+  origen: plugin backend-design
+  estado: ok
+  uso: Defender la complejidad antes de adoptar tecnología nueva
+/backend-design:design:
+  tipo: comando
+  origen: plugin backend-design
+  estado: ok
+  uso: Diseñar un componente backend con el flujo de 6 pasos antes de codificar
+/backend-design:audit:
+  tipo: comando
+  origen: plugin backend-design
+  estado: ok
+  uso: Auditar un componente existente (invariantes, errores, idempotencia, permisos, observabilidad)
+/backend-design:review-migration:
+  tipo: comando
+  origen: plugin backend-design
+  estado: ok
+  uso: Revisar una migración antes de commitearla
+/backend-design:explain-this-query:
+  tipo: comando
+  origen: plugin backend-design
+  estado: ok
+  uso: Predecir el plan de ejecución de una query y sus riesgos
+/backend-design:hunt-n-plus-one:
+  tipo: comando
+  origen: plugin backend-design
+  estado: ok
+  uso: Buscar patrones N+1 y proponer arreglos
+backend-design:component-architect:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Producir el blueprint de implementación de un componente backend
+backend-design:schema-reviewer:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Revisar un esquema o migración (restricciones, tipos, índices, riesgos)
+backend-design:security-reviewer:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Revisar un diff o componente en busca de fallas de seguridad
+backend-design:incident-thinker:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Listar incidentes probables de un diseño con detección y recuperación
+backend-design:incident-investigator:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Guiar una investigación de un problema activo en test o producción
+backend-design:boring-tech-advisor:
+  tipo: agente
+  origen: plugin backend-design
+  estado: ok
+  uso: Cuestionar la adopción de tecnología nueva frente a la alternativa aburrida
+
+# ---------------------------------------------------------------- revisión de código
+/code-review:
+  tipo: comando
+  origen: plugin code-review
+  estado: ok
+  uso: Revisar un PR; `/code-review ultra` lanza una revisión multiagente en la nube (la inicia el usuario y tiene costo)
+/codex:review:
+  tipo: comando
+  origen: plugin codex
+  estado: ok
+  uso: Segunda revisión del estado local de git con Codex
+/codex:adversarial-review:
+  tipo: comando
+  origen: plugin codex
+  estado: ok
+  uso: Revisión que desafía el enfoque y las decisiones de diseño
+/codex:rescue:
+  tipo: comando
+  origen: plugin codex
+  estado: ok
+  uso: Delegar una investigación o un arreglo difícil a Codex cuando hay bloqueo
+
+# ---------------------------------------------------------------- GitHub
+work-on-issue:
+  tipo: skill
+  origen: plugin work-on-issue
+  estado: ok
+  uso: Trabajar un issue de GitHub de punta a punta (análisis, TDD, PR) con `/work-on-issue #N`
+
+# ---------------------------------------------------------------- frontend y diseño
+frontend-design:
+  tipo: skill
+  origen: plugin frontend-design
+  estado: ok
+  uso: Dirección visual intencional al construir o rehacer UI
+figma-design-to-code:
+  tipo: skill
+  origen: plugin figma
+  estado: ok
+  uso: Implementar una pantalla a partir de un diseño en Figma
+figma-generate-design:
+  tipo: skill
+  origen: plugin figma
+  estado: ok
+  uso: Llevar una página del panel a Figma para iterar el diseño
+figma-generate-library:
+  tipo: skill
+  origen: plugin figma
+  estado: ok
+  uso: Construir el sistema de diseño (tokens y componentes) en Figma desde el código
+figma-generate-diagram:
+  tipo: skill
+  origen: plugin figma
+  estado: ok
+  uso: Diagramas (arquitectura, flujos) en FigJam
+web-perf:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Medir Core Web Vitals y accesibilidad de panel y landing
+built-in-browser:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Probar el panel o la landing en el navegador integrado
+chrome-browser:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Guiar trámites en sitios donde tienes sesión (Business Manager); las credenciales las pones tú
+theme-factory:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Aplicar temas consistentes a material y reportes
+
+# ---------------------------------------------------------------- infraestructura
+cloudflare:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Plataforma Cloudflare (DNS, Workers, R2, WAF)
+cloudflare-one:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Tunnel y Access (borde de producción, rutas públicas de webhooks)
+turnstile-spin:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Configurar Turnstile de punta a punta en formularios y widgets
+cloudflare-email-service:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Correo transaccional (invitaciones, avisos) si se elige Cloudflare en vez de SMTP
+desplegar-test:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Desplegar a test en Coolify repos distintos del backend
+
+# ---------------------------------------------------------------- datos y métricas
+data:analyze:
+  tipo: skill
+  origen: plugin data
+  estado: ok
+  uso: Responder preguntas de datos, desde un número hasta un análisis completo
+data:sql-queries:
+  tipo: skill
+  origen: plugin data
+  estado: ok
+  uso: SQL correcto y eficiente (calibración del ledger, KPIs, conciliación)
+data:validate-data:
+  tipo: skill
+  origen: plugin data
+  estado: ok
+  uso: Revisar un análisis antes de compartirlo
+data:statistical-analysis:
+  tipo: skill
+  origen: plugin data
+  estado: ok
+  uso: Tendencias, outliers y pruebas de significancia (benchmarks)
+data:build-dashboard:
+  tipo: skill
+  origen: plugin data
+  estado: ok
+  uso: Dashboard HTML con KPIs, gráficos y filtros
+dataviz:
+  tipo: skill
+  origen: incluida en Claude Code
+  estado: ok
+  uso: Gráficos, KPIs y paletas de datos con validación de color y accesibilidad
+kpi-dashboard-design:
+  tipo: skill
+  origen: usuario
+  estado: ok
+  uso: Diseñar dashboards de KPIs (MRR, churn, salud operativa)
+
+# ---------------------------------------------------------------- investigación y documentos
+deep-research:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Investigar con varias fuentes y comparar opciones (proveedores, requisitos de Meta, ISO)
+doc-coauthoring:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Coescribir specs, ADR, contratos y documentos de decisión
+docs:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Documentos compartibles y comentables (fuera del repo)
+docx:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Documentos Word (por ejemplo, para el abogado)
+pdf:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: PDF (one-pager, reportes)
+pptx:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Presentaciones (deck comercial)
+xlsx:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Hojas de cálculo (matriz competitiva, importaciones CSV)
+canvas-design:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Piezas gráficas estáticas para redes
+skill-creator:
+  tipo: skill
+  origen: claude.ai
+  estado: ok
+  uso: Crear o mejorar skills propias (por ejemplo, el ciclo por HU)
+claude-api:
+  tipo: skill
+  origen: integrada
+  estado: ok
+  uso: Precios, caché de prompts, visión y herramientas de la API de Claude
+
+# ---------------------------------------------------------------- marketing
+marketing:campaign-plan:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Brief de campaña con audiencia, mensajes, canales, calendario y métricas
+marketing:content-creation:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Contenido por canal (redes, blog, casos, landing)
+marketing:draft-content:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Borradores con formato por canal y recomendaciones SEO
+marketing:seo-audit:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Auditoría SEO, palabras clave y brechas de contenido
+marketing:competitive-brief:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Comparación de posicionamiento y mensajes frente a competidores
+marketing:brand-review:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Revisar textos contra la voz de marca y detectar promesas sin respaldo
+marketing:email-sequence:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Secuencias de mensajes (onboarding, reenganche, avisos)
+marketing:performance-report:
+  tipo: skill
+  origen: plugin marketing
+  estado: ok
+  uso: Reporte de resultados por canal con recomendaciones
